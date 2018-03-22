@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var gulpSequence = require('gulp-sequence');
 
 //for minifying
 var uglify = require('gulp-uglify');
@@ -27,6 +28,7 @@ gulp.task('partials', function() {
 
 gulp.task('sass', function () {
   return gulp.src('src/sass/*.scss')
+    .pipe(sass().on('error', sass.logError))
     .pipe(gulp.dest('src/tmp/css'));
 });
 
@@ -45,4 +47,4 @@ gulp.task('deleteTemp', function () {
         .pipe(clean({force: true}))
 });
 
-gulp.task('build', ['sass', 'partials', 'compress']);
+gulp.task('build', gulpSequence(['sass', 'partials', 'compress']));
