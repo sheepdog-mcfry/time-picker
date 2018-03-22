@@ -16,12 +16,11 @@ var rename = require('gulp-rename');
 var gulpHandlebars = require('gulp-compile-handlebars');
 
 gulp.task('partials', function() {
-  options = {
-    ignorePartials: true,
-    batch : ['./src/handlebars/partials'],
-  }
-  gulp.src(['src/handlebars/_index.hbs'])
-    .pipe(gulpHandlebars({}, options))
+  return gulp.src(['src/handlebars/_index.hbs'])
+    .pipe(gulpHandlebars({}, {
+      ignorePartials: true,
+      batch : ['./src/handlebars/partials'],
+    }))
     .pipe(rename('index.html'))
     .pipe(gulp.dest('src/tmp/'));
 });
@@ -32,9 +31,17 @@ gulp.task('sass', function () {
     .pipe(gulp.dest('src/tmp/css'));
 });
 
-gulp.task('compress', function() {
-  gulp.src("src/scripts/**.*")
+gulp.task('images', function() {
+  return gulp.src('src/img/**.*')
+    .pipe(gulp.dest('dist/img'));
+});
+
+gulp.task('scripts', function(){
+  return gulp.src("src/scripts/**.*")
     .pipe(gulp.dest('src/tmp/scripts'));
+});
+
+gulp.task('compress', function() {
   return gulp.src(['src/tmp/*.html'])
     .pipe(useref())
     .pipe(gulpIf('*.js', uglify()))
@@ -47,4 +54,4 @@ gulp.task('deleteTemp', function () {
         .pipe(clean({force: true}))
 });
 
-gulp.task('build', gulpSequence(['sass', 'partials', 'compress']));
+gulp.task('build', gulp.series('sass', 'partials', 'images', 'scripts', 'compress'));
