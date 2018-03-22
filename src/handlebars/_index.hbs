@@ -19,14 +19,14 @@
 	  <form action='selected-time.html' target='_blank' method='get'>
 	    	Hours:
 			<br>
-	    <input type='text' id='hoursInput' ngmodel='hours'>
+	    <input type='text' id='hoursInput' ngmodel='hour' name='hour'>
 	    <br>
 	    	Minutes:
 			<br>
-	    <input type='text' id='minutesInput' ngmodel='minutes'>
+	    <input type='text' id='minutesInput' ngmodel='minutes' name='minutes'>
 			<br>
-			<input type='radio' ng-model='tod' name='tod' value='PM'>PM
- 			<input type='radio' ng-model='tod' name='tod' value='AM'>AM
+			<input type='radio' ng-model='tod' name='time-of-day' value='PM'>PM
+ 			<input type='radio' ng-model='tod' name='time-of-day' value='AM'>AM
 	    <br><br>
 	    <input type='submit' value='Submit'>
 	  </form>
