@@ -11,28 +11,29 @@ var sass = require('gulp-sass');
 var clean = require('gulp-clean');
 
 //for handlebars
-var handlebars = require('handlebars');
 var rename = require('gulp-rename');
 var gulpHandlebars = require('gulp-compile-handlebars');
 
 gulp.task('partials', function() {
   options = {
-    batch : ['src/handlebars/partials'],
+    ignorePartials: true,
+    batch : ['./src/handlebars/partials'],
   }
-  gulp.src(['src/handlebars/partials/_index.hbs'])
-    .pipe(gulpHandlebars(options))
+  gulp.src(['src/handlebars/_index.hbs'])
+    .pipe(gulpHandlebars({}, options))
     .pipe(rename('index.html'))
-    .pipe(gulp.dest('src/tmp/html/'));
+    .pipe(gulp.dest('src/tmp/'));
 });
 
 gulp.task('sass', function () {
   return gulp.src('src/sass/*.scss')
-    .pipe(sass.sync().on('error', sass.logError))
     .pipe(gulp.dest('src/tmp/css'));
 });
 
 gulp.task('compress', function() {
-  return gulp.src(['src/tmp/html/*.html'])
+  gulp.src("src/scripts/**.*")
+    .pipe(gulp.dest('src/tmp/scripts'));
+  return gulp.src(['src/tmp/*.html'])
     .pipe(useref())
     .pipe(gulpIf('*.js', uglify()))
     .pipe(gulpIf('*.css', cssnano()))
@@ -44,4 +45,4 @@ gulp.task('deleteTemp', function () {
         .pipe(clean({force: true}))
 });
 
-gulp.task('build', ['partials', 'sass', 'compress', 'deleteTemp']);
+gulp.task('build', ['sass', 'partials', 'compress']);
