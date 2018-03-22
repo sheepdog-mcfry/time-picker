@@ -1,0 +1,49 @@
+.clock {
+  background: #fff url(../img/clockface.png) no-repeat center;
+  top: 0;
+  right: 0;
+  position: relative;
+  height: 25em;
+  width: 25em;
+  padding: 0;
+  margin: 1em auto;
+  border-radius: 50%;
+  overflow: hidden;
+
+}
+
+.hour {
+  position: absolute;
+  left: -100%;
+  width: 200%;
+  height: 170%;
+  text-align: center;
+  user-select: none;
+  transform: skewY(60deg) rotate(15deg);
+  padding-top: 0px;
+}
+
+li {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 50%;
+  transform-origin: 0% 100%;
+}
+
+li:hover {
+	opacity: 0.5;
+	background: grey;
+}
+
+@for $i from 1 to 13 {
+  li:nth-child(#{$i}) {
+    transform: rotate(($i - 1)*30+15deg) skewY(-60deg);;
+  }
+}
+
+.form {
+  position: relative;
+}
