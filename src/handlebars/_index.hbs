@@ -4,8 +4,10 @@
 	<!--build:css css/styles.min.css-->
 	<link rel='stylesheet' type='text/css' href='css/clock.css'>
 	<!--endbuild -->
+	<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js'></script>
 	<!--build:js js/main.min.js -->
 	<script src='scripts/script.js'></script>
+
 	<!-- endbuild -->
 </head>
 <body>
@@ -14,13 +16,18 @@
 	<h1>Select minutes</h1>
 	{{> _minute-clock }}
 	<div class='form'>
-	  <form action='selected-time.html' target='_blank' method='post'>
-	      Hours:<br>
-	    <input type='text' id='hoursInput' value=''>
-	      <br>
-	      Minutes:<br>
-	    <input type='text' id='minutesInput' value=''>
-	      <br><br>
+	  <form action='selected-time.html' target='_blank' method='get'>
+	    	Hours:
+			<br>
+	    <input type='text' id='hoursInput' ngmodel='hours'>
+	    <br>
+	    	Minutes:
+			<br>
+	    <input type='text' id='minutesInput' ngmodel='minutes'>
+			<br>
+			<input type='radio' ng-model='tod' name='tod' value='PM'>PM
+ 			<input type='radio' ng-model='tod' name='tod' value='AM'>AM
+	    <br><br>
 	    <input type='submit' value='Submit'>
 	  </form>
 	</div>
