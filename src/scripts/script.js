@@ -4,11 +4,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
 });
 
 function initClockListeners() {
-  var hour = document.querySelector('.clock');
+  var hour = document.querySelector('.hour-clock');
   hour.addEventListener('click', setHour, false);
 
-  var minute = document.querySelector('.clock');
-  hour.addEventListener('click', setMinute, false);
+  var minute = document.querySelector('.minute-clock');
+  minute.addEventListener('click', setMinute, false);
 }
 
 function ensureTwoDigits(num) {
