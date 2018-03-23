@@ -7,7 +7,7 @@
 	<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js'></script>
 	<!--build:js js/main.min.js -->
 	<script src='scripts/script.js'></script>
-
+	<script src='scripts/validate-form.js'></script>
 	<!-- endbuild -->
 </head>
 <body>
@@ -16,7 +16,7 @@
 	<h1>Select minutes</h1>
 	{{> _minute-clock }}
 	<div class='form'>
-	  <form action='selected-time.html' target='_blank' method='get'>
+	  <form action='selected-time.html' target='_blank' method='get' onsubmit='return validateForm()'>
 	    	Hours:
 			<br>
 	    <input type='text' id='hoursInput' ngmodel='hour' name='hour'>
@@ -25,7 +25,7 @@
 			<br>
 	    <input type='text' id='minutesInput' ngmodel='minutes' name='minutes'>
 			<br>
-			<input type='radio' ng-model='tod' name='time-of-day' value='PM'>PM
+			<input type='radio' ng-model='tod' name='time-of-day' value='PM' checked>PM
  			<input type='radio' ng-model='tod' name='time-of-day' value='AM'>AM
 	    <br><br>
 	    <input type='submit' value='Submit'>
